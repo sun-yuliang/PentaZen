@@ -37,6 +37,7 @@ static void table_init()
 	nei20_init();
 	vcx15_init();
 	vcx20_init();
+	pat_init_freestyle15();
 	pat_init(FREESTYLE, 20);
 }
 
@@ -81,7 +82,7 @@ void gomocup_loop(board_t* bd, search_t* srh)
 				num = str_to_int(num1);
 
 				if (num != 15 && num != 20)
-					printf("ERROR unsupported board size\n");
+					printf("ERROR Board size should be 15 * 15 or 20 * 20\n");
 				else
 				{
 					table_init();
@@ -175,7 +176,10 @@ void gomocup_loop(board_t* bd, search_t* srh)
 				{
 					substring(rec, tmp, 2);
 					num = str_to_u32(tmp);
-					if (bd->rule != num)
+
+					if (num == RENJU && bd->side != 15)
+						printf("ERROR Board size should be 15 * 15 for renju rule\n");
+					else if (bd->rule != num)
 					{
 						bd->rule = num;
 						pat_init(num, bd->side);

@@ -11,37 +11,51 @@
  */
 
 #include "table.h"
+#include "utility.h"
 #include "pattern.h"
 #include "board.h"
 #include "array.h"
 
 // neighbor tables
-u16 NeiA15[15 * 15];
+u16 NeiA15[15 * 15];	// # of neighbors 3-disc away in 8 directions
 u16 NeiA20[20 * 20];
-u16 NeiD15[15 * 15];
+u16 NeiD15[15 * 15];	// # of neighbors 4-disc away in 8 directions
 u16 NeiD20[20 * 20];
 u16 Nei15[15 * 15][NEI_SIZE * 8];
 u16 Nei20[20 * 20][NEI_SIZE * 8];
-u16 Vcx15[15 * 15][VCX_SIZE * 8];
+u16 Vcx15[15 * 15][VCX_SIZE * 8];	// neighbors <= 4-discs away in 8 directions
 u16 Vcx20[20 * 20][VCX_SIZE * 8];
 
-// pattern tables
-u16 Pat20[P20][PAT_SIZE + SPE_SIZE];
-u16 Pat19[P19][PAT_SIZE + SPE_SIZE];
-u16 Pat18[P18][PAT_SIZE + SPE_SIZE];
-u16 Pat17[P17][PAT_SIZE + SPE_SIZE];
-u16 Pat16[P16][PAT_SIZE + SPE_SIZE];
-u16 Pat15[P15][PAT_SIZE + SPE_SIZE];
-u16 Pat14[P14][PAT_SIZE + SPE_SIZE];
-u16 Pat13[P13][PAT_SIZE + SPE_SIZE];
-u16 Pat12[P12][PAT_SIZE + SPE_SIZE];
-u16 Pat11[P11][PAT_SIZE + SPE_SIZE];
-u16 Pat10[P10][PAT_SIZE + SPE_SIZE];
-u16 Pat9[P9][PAT_SIZE + SPE_SIZE];
-u16 Pat8[P8][PAT_SIZE + SPE_SIZE];
-u16 Pat7[P7][PAT_SIZE + SPE_SIZE];
-u16 Pat6[P6][PAT_SIZE + SPE_SIZE];
-u16 Pat5[P5][PAT_SIZE + SPE_SIZE];
+// freestyle pattern tables
+static u16 Pat15w[P15][PAT_SIZE + SPE_SIZE];
+static u16 Pat14w[P14][PAT_SIZE + SPE_SIZE];
+static u16 Pat13w[P13][PAT_SIZE + SPE_SIZE];
+static u16 Pat12w[P12][PAT_SIZE + SPE_SIZE];
+static u16 Pat11w[P11][PAT_SIZE + SPE_SIZE];
+static u16 Pat10w[P10][PAT_SIZE + SPE_SIZE];
+static u16 Pat9w[P9][PAT_SIZE + SPE_SIZE];
+static u16 Pat8w[P8][PAT_SIZE + SPE_SIZE];
+static u16 Pat7w[P7][PAT_SIZE + SPE_SIZE];
+static u16 Pat6w[P6][PAT_SIZE + SPE_SIZE];
+static u16 Pat5w[P5][PAT_SIZE + SPE_SIZE];
+
+// general pattern tables
+static u16 Pat20[P20][PAT_SIZE + SPE_SIZE];
+static u16 Pat19[P19][PAT_SIZE + SPE_SIZE];
+static u16 Pat18[P18][PAT_SIZE + SPE_SIZE];
+static u16 Pat17[P17][PAT_SIZE + SPE_SIZE];
+static u16 Pat16[P16][PAT_SIZE + SPE_SIZE];
+static u16 Pat15[P15][PAT_SIZE + SPE_SIZE];
+static u16 Pat14[P14][PAT_SIZE + SPE_SIZE];
+static u16 Pat13[P13][PAT_SIZE + SPE_SIZE];
+static u16 Pat12[P12][PAT_SIZE + SPE_SIZE];
+static u16 Pat11[P11][PAT_SIZE + SPE_SIZE];
+static u16 Pat10[P10][PAT_SIZE + SPE_SIZE];
+static u16 Pat9[P9][PAT_SIZE + SPE_SIZE];
+static u16 Pat8[P8][PAT_SIZE + SPE_SIZE];
+static u16 Pat7[P7][PAT_SIZE + SPE_SIZE];
+static u16 Pat6[P6][PAT_SIZE + SPE_SIZE];
+static u16 Pat5[P5][PAT_SIZE + SPE_SIZE];
 
 // Array of 2^0-2^19.
 static u32 pow2[3][21] = {
@@ -722,7 +736,7 @@ static void binary_line_cnt(u16* tab, const u32 index, const int len, const u16 
 			mask |= five[fiv[i]].mask << i;
 		}
 	}
-	if (rule == RENJU)
+	if (rule == STANDARD || rule == RENJU)
 	{
 		// d3b8
 		for (i = 0; i < bound8; i++)
@@ -846,7 +860,7 @@ static void binary_line_cnt(u16* tab, const u32 index, const int len, const u16 
 		}
 	}
 	// d3b7
-	if (rule == RENJU)
+	if (rule == STANDARD || rule == RENJU)
 	{
 		for (i = 0; i < bound7; i++)
 		{
@@ -1119,7 +1133,40 @@ static void binary_line_cnt(u16* tab, const u32 index, const int len, const u16 
 	}
 }
 
-// Generate pattern helper tables.
+// Generate freestyle pattern tables.
+void pat_init_freestyle15()
+{
+	u32 i;
+	helper_init();
+
+	for (i = 0; i < pow2[1][15]; i++)
+	{
+		if (i < P15)
+			binary_line_cnt(Pat15w[i], i, 15, FREESTYLE);
+		if (i < P14)
+			binary_line_cnt(Pat14w[i], i, 14, FREESTYLE);
+		if (i < P13)
+			binary_line_cnt(Pat13w[i], i, 13, FREESTYLE);
+		if (i < P12)
+			binary_line_cnt(Pat12w[i], i, 12, FREESTYLE);
+		if (i < P11)
+			binary_line_cnt(Pat11w[i], i, 11, FREESTYLE);
+		if (i < P10)
+			binary_line_cnt(Pat10w[i], i, 10, FREESTYLE);
+		if (i < P9)
+			binary_line_cnt(Pat9w[i], i, 9, FREESTYLE);
+		if (i < P8)
+			binary_line_cnt(Pat8w[i], i, 8, FREESTYLE);
+		if (i < P7)
+			binary_line_cnt(Pat7w[i], i, 7, FREESTYLE);
+		if (i < P6)
+			binary_line_cnt(Pat6w[i], i, 6, FREESTYLE);
+		if (i < P5)
+			binary_line_cnt(Pat5w[i], i, 5, FREESTYLE);
+	}
+}
+
+// Generate pattern tables.
 void pat_init(const u16 rule, const u16 size)
 {
 	u32 i;
@@ -1236,58 +1283,102 @@ void line_update(board_t* bd, const u16 start, const u16 len, const u16 step, co
 		}
 	}
 
-	switch (len)
+	if (bd->rule == RENJU && color != bd->fcolor)
 	{
-	case 5:
-		tab = Pat5[index];
-		break;
-	case 6:
-		tab = Pat6[index];
-		break;
-	case 7:
-		tab = Pat7[index];
-		break;
-	case 8:
-		tab = Pat8[index];
-		break;
-	case 9:
-		tab = Pat9[index];
-		break;
-	case 10:
-		tab = Pat10[index];
-		break;
-	case 11:
-		tab = Pat11[index];
-		break;
-	case 12:
-		tab = Pat12[index];
-		break;
-	case 13:
-		tab = Pat13[index];
-		break;
-	case 14:
-		tab = Pat14[index];
-		break;
-	case 15:
-		tab = Pat15[index];
-		break;
-	case 16:
-		tab = Pat16[index];
-		break;
-	case 17:
-		tab = Pat17[index];
-		break;
-	case 18:
-		tab = Pat18[index];
-		break;
-	case 19:
-		tab = Pat19[index];
-		break;
-	case 20:
-		tab = Pat20[index];
-		break;
-	default:
-		return;
+		switch (len)
+		{
+		case 5:
+			tab = Pat5w[index];
+			break;
+		case 6:
+			tab = Pat6w[index];
+			break;
+		case 7:
+			tab = Pat7w[index];
+			break;
+		case 8:
+			tab = Pat8w[index];
+			break;
+		case 9:
+			tab = Pat9w[index];
+			break;
+		case 10:
+			tab = Pat10w[index];
+			break;
+		case 11:
+			tab = Pat11w[index];
+			break;
+		case 12:
+			tab = Pat12w[index];
+			break;
+		case 13:
+			tab = Pat13w[index];
+			break;
+		case 14:
+			tab = Pat14w[index];
+			break;
+		case 15:
+			tab = Pat15w[index];
+			break;
+		default:
+			return;
+		}
+	}
+	else
+	{
+		switch (len)
+		{
+		case 5:
+			tab = Pat5[index];
+			break;
+		case 6:
+			tab = Pat6[index];
+			break;
+		case 7:
+			tab = Pat7[index];
+			break;
+		case 8:
+			tab = Pat8[index];
+			break;
+		case 9:
+			tab = Pat9[index];
+			break;
+		case 10:
+			tab = Pat10[index];
+			break;
+		case 11:
+			tab = Pat11[index];
+			break;
+		case 12:
+			tab = Pat12[index];
+			break;
+		case 13:
+			tab = Pat13[index];
+			break;
+		case 14:
+			tab = Pat14[index];
+			break;
+		case 15:
+			tab = Pat15[index];
+			break;
+		case 16:
+			tab = Pat16[index];
+			break;
+		case 17:
+			tab = Pat17[index];
+			break;
+		case 18:
+			tab = Pat18[index];
+			break;
+		case 19:
+			tab = Pat19[index];
+			break;
+		case 20:
+			tab = Pat20[index];
+			break;
+		default:
+			return;
+		}
 	}
 	
 	if (op == ADD)
@@ -1335,58 +1426,102 @@ void line_update_fast(board_t* bd, const u16 start, const u16 len, const u16 ste
 		tmp += step;
 	}
 
-	switch (len)
+	if (bd->rule == RENJU && color != bd->fcolor)
 	{
-	case 5:
-		tab = Pat5[index];
-		break;
-	case 6:
-		tab = Pat6[index];
-		break;
-	case 7:
-		tab = Pat7[index];
-		break;
-	case 8:
-		tab = Pat8[index];
-		break;
-	case 9:
-		tab = Pat9[index];
-		break;
-	case 10:
-		tab = Pat10[index];
-		break;
-	case 11:
-		tab = Pat11[index];
-		break;
-	case 12:
-		tab = Pat12[index];
-		break;
-	case 13:
-		tab = Pat13[index];
-		break;
-	case 14:
-		tab = Pat14[index];
-		break;
-	case 15:
-		tab = Pat15[index];
-		break;
-	case 16:
-		tab = Pat16[index];
-		break;
-	case 17:
-		tab = Pat17[index];
-		break;
-	case 18:
-		tab = Pat18[index];
-		break;
-	case 19:
-		tab = Pat19[index];
-		break;
-	case 20:
-		tab = Pat20[index];
-		break;
-	default:
-		return;
+		switch (len)
+		{
+		case 5:
+			tab = Pat5w[index];
+			break;
+		case 6:
+			tab = Pat6w[index];
+			break;
+		case 7:
+			tab = Pat7w[index];
+			break;
+		case 8:
+			tab = Pat8w[index];
+			break;
+		case 9:
+			tab = Pat9w[index];
+			break;
+		case 10:
+			tab = Pat10w[index];
+			break;
+		case 11:
+			tab = Pat11w[index];
+			break;
+		case 12:
+			tab = Pat12w[index];
+			break;
+		case 13:
+			tab = Pat13w[index];
+			break;
+		case 14:
+			tab = Pat14w[index];
+			break;
+		case 15:
+			tab = Pat15w[index];
+			break;
+		default:
+			return;
+		}
+	}
+	else
+	{
+		switch (len)
+		{
+		case 5:
+			tab = Pat5[index];
+			break;
+		case 6:
+			tab = Pat6[index];
+			break;
+		case 7:
+			tab = Pat7[index];
+			break;
+		case 8:
+			tab = Pat8[index];
+			break;
+		case 9:
+			tab = Pat9[index];
+			break;
+		case 10:
+			tab = Pat10[index];
+			break;
+		case 11:
+			tab = Pat11[index];
+			break;
+		case 12:
+			tab = Pat12[index];
+			break;
+		case 13:
+			tab = Pat13[index];
+			break;
+		case 14:
+			tab = Pat14[index];
+			break;
+		case 15:
+			tab = Pat15[index];
+			break;
+		case 16:
+			tab = Pat16[index];
+			break;
+		case 17:
+			tab = Pat17[index];
+			break;
+		case 18:
+			tab = Pat18[index];
+			break;
+		case 19:
+			tab = Pat19[index];
+			break;
+		case 20:
+			tab = Pat20[index];
+			break;
+		default:
+			return;
+		}
 	}
 
 	if (op == ADD)
