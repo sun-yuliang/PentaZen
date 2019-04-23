@@ -54,7 +54,7 @@ static void search_init(search_t* srh)
 	srh->sc.free1 = (long)(FREE1_SCORE);
 	srh->sc.dead1 = (long)(DEAD1_SCORE);
 	srh->me = BLACK;
-	srh->hpleaf = 16;
+	srh->hpleaf = 18;
 	srh->htleaf = 14;
 	srh->mindep = 6;
 	srh->maxdep = 20;

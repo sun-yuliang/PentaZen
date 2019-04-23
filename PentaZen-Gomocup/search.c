@@ -250,6 +250,38 @@ static long alphabeta_iterate(board_t* bd, const search_t* srh, u16* best, u16* 
 	return score;
 }
 
+// Remove VCF lose points from hlist(bd). Keep hlist(bd) unchanged if all moves lose.
+static void vcf_filter(board_t* bd, search_t* srh, const u16 dep)
+{
+	mvlist_t mvtmp;
+	u16 pos, tmp;
+
+	mvlist_reset(&mvtmp);
+	mvlist_copy(&mvtmp, hlist(bd));
+	pos = mvlist_first(hlist(bd));
+
+	srh->me = opp(srh->me);
+	while (pos != END)
+	{
+		do_move(bd, pos, opp(srh->me));
+		if (vcf(bd, dep, srh->me, srh->me, &tmp, LOSE - 1, WIN + 1, true) > WIN_THRE)
+			mvlist_remove(&mvtmp, pos);
+		undo(bd);
+		pos = mvlist_next(hlist(bd), pos);
+	}
+	srh->me = opp(srh->me);
+
+	if (mvlist_size(&mvtmp) > 0)
+		mvlist_copy(hlist(bd), &mvtmp);
+	else
+	{
+		if (srh->me == BLACK)
+			printf("MESSAGE Black VCF lose!\n");
+		else if (srh->me == WHITE)
+			printf("MESSAGE White VCF lose!\n");
+	}
+}
+
 // Remove VCT lose points from hlist(bd). Keep hlist(bd) unchanged if all moves lose.
 static void vct_filter(board_t* bd, search_t* srh, const u16 dep)
 {
@@ -322,6 +354,9 @@ u16 get_best(board_t* bd, search_t* srh)
 			printf("MESSAGE White VCF win!\n");
 		return pos;
 	}
+
+	// remove VCF lose points
+	//vcf_filter(bd, srh, srh->vcfdep - 2);
 #endif
 
 #if VCT_SEARCH
