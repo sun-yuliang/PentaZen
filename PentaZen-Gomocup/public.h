@@ -40,8 +40,8 @@ extern "C" {
 #define SPE_D3F2			0
 
 // display options
-#define DISPLAY_BOARD		1
-#define DISPLAY_MSTK		1
+#define DISPLAY_BOARD		0
+#define DISPLAY_MSTK		0
 #define DISPLAY_HLIST		0
 #define DISPLAY_PAT			0
 #define DISPLAY_PINC		0

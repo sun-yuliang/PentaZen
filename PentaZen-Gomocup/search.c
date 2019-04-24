@@ -276,9 +276,9 @@ static void vcf_filter(board_t* bd, search_t* srh, const u16 dep)
 	else
 	{
 		if (srh->me == BLACK)
-			printf("MESSAGE Black VCF lose!\n");
+			printf("MESSAGE White VCF!\n");
 		else if (srh->me == WHITE)
-			printf("MESSAGE White VCF lose!\n");
+			printf("MESSAGE Black VCF!\n");
 	}
 }
 
@@ -308,9 +308,9 @@ static void vct_filter(board_t* bd, search_t* srh, const u16 dep)
 	else
 	{
 		if (srh->me == BLACK)
-			printf("MESSAGE Black VCT lose!\n");
+			printf("MESSAGE White VCT!\n");
 		else if (srh->me == WHITE)
-			printf("MESSAGE White VCT lose!\n");
+			printf("MESSAGE Black VCT!\n");
 	}
 }
 
@@ -349,9 +349,9 @@ u16 get_best(board_t* bd, search_t* srh)
 	if (vcf(bd, srh->vcfdep, srh->me, srh->me, &pos, LOSE - 1, WIN + 1, true) > WIN_THRE)
 	{
 		if (srh->me == BLACK)
-			printf("MESSAGE Black VCF win!\n");
+			printf("MESSAGE Black VCF!\n");
 		else if (srh->me == WHITE)
-			printf("MESSAGE White VCF win!\n");
+			printf("MESSAGE White VCF!\n");
 		return pos;
 	}
 
@@ -364,9 +364,9 @@ u16 get_best(board_t* bd, search_t* srh)
 	if (vct(bd, srh->vctdep, srh->me, srh->me, &pos, LOSE - 1, WIN + 1, true) > WIN_THRE)
 	{
 		if (srh->me == BLACK)
-			printf("MESSAGE Black VCT win!\n");
+			printf("MESSAGE Black VCT!\n");
 		else if (srh->me == WHITE)
-			printf("MESSAGE White VCT win!\n");
+			printf("MESSAGE White VCT!\n");
 		return pos;
 	}
 
@@ -382,7 +382,7 @@ u16 get_best(board_t* bd, search_t* srh)
 		alphabeta_iterate(bd, srh, &pos, &dep, tlimit);
 	else
 		return mvlist_first(hlist(bd));
-	printf("MESSAGE Alpha-Beta search depth <= %d\n", dep);
+	printf("MESSAGE Alpha-Beta search %d ply\n", dep);
 #else
 	alphabeta(bd, srh, 6, srh->me, &pos, LOSE - 1, WIN + 1, true, 0);
 #endif

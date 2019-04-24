@@ -58,8 +58,8 @@ static void search_init(search_t* srh)
 	srh->htleaf = 14;
 	srh->mindep = 6;
 	srh->maxdep = 20;
-	srh->vcfdep = 24;
-	srh->vctdep = 18;
+	srh->vcfdep = 30;
+	srh->vctdep = 20;
 }
 
 void gomocup_loop(board_t* bd, search_t* srh)
