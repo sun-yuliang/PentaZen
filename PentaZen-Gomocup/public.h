@@ -28,7 +28,7 @@ extern "C" {
 // time management
 #define TIME_DIVIDER1		24.0
 #define TIME_DIVIDER2		50.0
-#define TIME_DIV_PCT		0.8
+#define TIME_DIV_PCT		0.85
 #define ITE_STOP_PCT		0.5
 #define SECOND_RSV			0.1
 
