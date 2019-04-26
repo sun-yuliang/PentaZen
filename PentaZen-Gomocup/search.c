@@ -332,6 +332,32 @@ u16 get_best(board_t* bd, search_t* srh)
 			return 210;
 	}
 
+	// the second move
+	if (bd->num == 1 && bd->side == 15 && mvlist_first(mstk(bd)) == 112)
+	{
+		switch (rand() % 8)
+		{
+		case 0:
+			return 97;
+		case 1:
+			return 96;
+		case 2:
+			return 111;
+		case 3:
+			return 126;
+		case 4:
+			return 127;
+		case 5:
+			return 128;
+		case 6:
+			return 113;
+		case 7:
+			return 98;
+		default:
+			break;
+		}
+	}
+
 	// if win/lose is confirmed
 	if (cand_winlose(bd, srh->me))
 		return mvlist_first(hlist(bd));

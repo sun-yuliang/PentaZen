@@ -31,6 +31,7 @@
 
 static void table_init()
 {
+	srand((unsigned int)time(NULL));
 	nei15_helper_init();
 	nei20_helper_init();
 	nei15_init();
