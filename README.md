@@ -1,17 +1,25 @@
-# PentaZen-Gomocup
-PentaZen is a gomoku/renju engine supporting Gomocup protocol. Please compile first and download Piskvork gomoku manager from https://gomocup.org/download-gomocup-manager to run it.
+# PentaZen2019
 
-## Overview
-PentaZen engine is written in C. It is compatible with Windows7 and Windows10. It supports freestyle(five or more stones win), standard(exactly five stones win) and renju rules. For freestyle and standard rules, the board size should be 15 * 15 or 20 * 20. For renju rule, the board size should be 15 * 15. In Gomocup 2019, PentaZen ranks 19th in freestyle league and 16th in fastgame league.
+PentaZen2019 is a gomoku/renju engine supporting [Gomocup protocol](http://petr.lastovicka.sweb.cz/protocl2en.htm). It is based on heuristic alpha-beta search and VCF/VCT search. In [Gomocup 2019](https://gomocup.org/results/gomocup-result-2019/), PentaZen ranks 19th in the freestyle league and 16th in the fastgame league.
 
-## Algorithm and Performance
-PentaZen uses classic searching techniques. The basic algorithm is minimax search with pruning accelerated by hash table. Under Gomocup fastgame time limit(5s per move, 120s per match), PentaZen can finish 30-ply VCF search, 20-ply VCT search and 10-ply to 14-ply pruned minimax search per step.
+## Getting Started
 
-# PentaZen-Gomocup
-PentaZen是支持Gomocup协议的五子棋/连珠引擎。在工程里编译之后用Piskvork挂载exe文件即可运行。Piskvork下载地址：https://gomocup.org/download-gomocup-manager
+### Environment
 
-## 简介
-PentaZen引擎是用C语言编写的，可以在Windows7和Windows10环境下运行。PentaZen支持无禁手，无禁手五连胜和连珠规则（不支持打点和交换）。两种无禁手规则下，棋盘大小可以是15 * 15或20 * 20，连珠规则下棋盘大小只能是15 * 15。在2019年Gomocup世界五子棋AI锦标赛中，PentaZen慢棋组排名第19位，快棋组排名第16位。
+PentaZen2019 is capatible with 64-bit Windows 7 and 64-bit Windows 10.
 
-## 算法性能
-PentaZen采用传统搜索技术，即带剪枝的极大极小搜索和散列表加速。在每步5秒，每局120秒的时限下，PentaZen每步都可以完成30步VCF算杀，20步VCT算杀和10-14步带剪枝的极大极小搜索。
+### Download
+
+Before running PentaZen2019, you need to [download Piskvork gomoku manager](https://sourceforge.net/projects/piskvork/files/piskvork.zip/download) and [download PentaZen2019 engine](https://github.com/sun-yuliang/PentaZen-2019/releases/download/v0.1.0/pbrain-PentaZen2019_64.zip).
+
+## Running the Program
+
+In Piskvork, you can choose pbrain-PentaZen2019.exe as the engine. The detailed infomation can be found in the Readme file of Piskvork.
+
+## Author
+
+* **Sun**
+
+## License
+
+This project is licensed under the GPL License - see the [LICENSE](https://github.com/sun-yuliang/PentaZen-2019/blob/master/LICENSE) file for details.
