@@ -1,6 +1,9 @@
+# Notice
+Pentazen2019 is the first version of PentaZen. The newer versions are under development, which differ a lot and are much stronger than PentaZen2019.
+
 # PentaZen2019
 
-PentaZen2019 is a gomoku/renju engine supporting [Gomocup protocol](http://petr.lastovicka.sweb.cz/protocl2en.htm). It is based on heuristic alpha-beta search and VCF/VCT search. In [Gomocup 2019](https://gomocup.org/results/gomocup-result-2019/), PentaZen ranks 19th in the freestyle league and 16th in the fastgame league.
+PentaZen2019 is a gomoku/renju engine supporting [Gomocup protocol](http://petr.lastovicka.sweb.cz/protocl2en.htm). It is based on heuristic alpha-beta search accelerated by transposition table and history table. It can search 10-14 ply and calculate some VCF/VCT of 20-30 ply in several seconds during midgames. In [Gomocup 2019](https://gomocup.org/results/gomocup-result-2019/), PentaZen ranks 19th in the freestyle league and 16th in the fastgame league.
 
 ## Getting Started
 
@@ -15,6 +18,14 @@ Before running PentaZen2019, you need to [download Piskvork gomoku manager](http
 ## Running the Program
 
 In Piskvork, you can choose pbrain-PentaZen2019.exe as the engine. The detailed infomation can be found in the Readme file of Piskvork.
+
+## Defects
+
+Note that the following defects are improved in the newer versions.
+
+ * Pattern table used is not exhuastive.
+ * Cannot recognize recursively defined fouls.
+ * Prune too much candidate moves, resulting in inaccurate evaluation.
 
 ## Author
 
