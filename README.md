@@ -1,9 +1,9 @@
 # Notice
-Pentazen2019 is the first version of PentaZen. The newer versions are under development, which differ a lot and are much stronger than PentaZen2019.
+Pentazen2019 is PentaZen 0.1.0. The newer versions are under development, which differ a lot and are much stronger than PentaZen2019.
 
 # PentaZen2019
 
-PentaZen2019 is a gomoku/renju engine supporting [Gomocup protocol](http://petr.lastovicka.sweb.cz/protocl2en.htm). It is based on heuristic alpha-beta search accelerated by transposition table and history table. It can search 10-14 ply and calculate some VCF/VCT of 20-30 ply in several seconds during midgames. In [Gomocup 2019](https://gomocup.org/results/gomocup-result-2019/), PentaZen ranks 19th in the freestyle league and 16th in the fastgame league.
+PentaZen2019 is a gomoku/renju playing engine supporting [Gomocup protocol](http://petr.lastovicka.sweb.cz/protocl2en.htm). It is based on heuristic alpha-beta search accelerated by transposition table and table look-up. It can search 10-14 ply and calculate some VCF/VCT of 20-30 ply in several seconds during midgames. In [Gomocup 2019](https://gomocup.org/results/gomocup-result-2019/), PentaZen ranks 19th in freestyle league and 16th in fastgame league.
 
 ## Getting Started
 
@@ -21,11 +21,11 @@ In Piskvork, you can choose pbrain-PentaZen2019.exe as the engine. The detailed 
 
 ## Defects
 
-Note that the following defects are improved in the newer versions.
+Note that some of the following defects are improved in newer versions.
 
- * Pattern table used is not exhuastive.
+ * Use not exhuastive pattern tables.
  * Cannot recognize recursively defined fouls.
- * Prune too much candidate moves, resulting in inaccurate evaluation.
+ * Prune too many moves, resulting in inaccurate evaluation.
 
 ## Author
 
