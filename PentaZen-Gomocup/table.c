@@ -1174,6 +1174,7 @@ void pat_init(const u16 rule, const u16 size)
 
 	for (i = 0; i < pow2[1][size]; i++)
 	{
+#if 0
 		if (i < P20)
 			binary_line_cnt(Pat20[i], i, 20, rule);
 		if (i < P19)
@@ -1184,6 +1185,7 @@ void pat_init(const u16 rule, const u16 size)
 			binary_line_cnt(Pat17[i], i, 17, rule);
 		if (i < P16)
 			binary_line_cnt(Pat16[i], i, 16, rule);
+#endif
 		if (i < P15)
 			binary_line_cnt(Pat15[i], i, 15, rule);
 		if (i < P14)

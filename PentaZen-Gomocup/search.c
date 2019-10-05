@@ -273,13 +273,13 @@ static void vcf_filter(board_t* bd, search_t* srh, const u16 dep)
 
 	if (mvlist_size(&mvtmp) > 0)
 		mvlist_copy(hlist(bd), &mvtmp);
-	else
-	{
-		if (srh->me == BLACK)
-			printf("MESSAGE White VCF!\n");
-		else if (srh->me == WHITE)
-			printf("MESSAGE Black VCF!\n");
-	}
+	//else
+	//{
+	//	if (srh->me == BLACK)
+	//		printf("MESSAGE White VCF!\n");
+	//	else if (srh->me == WHITE)
+	//		printf("MESSAGE Black VCF!\n");
+	//}
 }
 
 // Remove VCT lose points from hlist(bd). Keep hlist(bd) unchanged if all moves lose.
@@ -305,13 +305,13 @@ static void vct_filter(board_t* bd, search_t* srh, const u16 dep)
 
 	if (mvlist_size(&mvtmp) > 0)
 		mvlist_copy(hlist(bd), &mvtmp);
-	else
-	{
-		if (srh->me == BLACK)
-			printf("MESSAGE White VCT!\n");
-		else if (srh->me == WHITE)
-			printf("MESSAGE Black VCT!\n");
-	}
+	//else
+	//{
+	//	if (srh->me == BLACK)
+	//		printf("MESSAGE White VCT!\n");
+	//	else if (srh->me == WHITE)
+	//		printf("MESSAGE Black VCT!\n");
+	//}
 }
 
 // Return the best position for srh->me.
@@ -374,10 +374,10 @@ u16 get_best(board_t* bd, search_t* srh)
 	// VCF search
 	if (vcf(bd, srh->vcfdep, srh->me, srh->me, &pos, LOSE - 1, WIN + 1, true) > WIN_THRE)
 	{
-		if (srh->me == BLACK)
-			printf("MESSAGE Black VCF!\n");
-		else if (srh->me == WHITE)
-			printf("MESSAGE White VCF!\n");
+		//if (srh->me == BLACK)
+		//	printf("MESSAGE Black VCF!\n");
+		//else if (srh->me == WHITE)
+		//	printf("MESSAGE White VCF!\n");
 		return pos;
 	}
 
@@ -389,10 +389,10 @@ u16 get_best(board_t* bd, search_t* srh)
 	// VCT search
 	if (vct(bd, srh->vctdep, srh->me, srh->me, &pos, LOSE - 1, WIN + 1, true) > WIN_THRE)
 	{
-		if (srh->me == BLACK)
-			printf("MESSAGE Black VCT!\n");
-		else if (srh->me == WHITE)
-			printf("MESSAGE White VCT!\n");
+		//if (srh->me == BLACK)
+		//	printf("MESSAGE Black VCT!\n");
+		//else if (srh->me == WHITE)
+		//	printf("MESSAGE White VCT!\n");
 		return pos;
 	}
 
@@ -408,10 +408,19 @@ u16 get_best(board_t* bd, search_t* srh)
 		alphabeta_iterate(bd, srh, &pos, &dep, tlimit);
 	else
 		return mvlist_first(hlist(bd));
-	printf("MESSAGE Alpha-Beta search %d ply\n", dep);
+	//printf("MESSAGE Alpha-Beta search %d ply\n", dep);
 #else
 	alphabeta(bd, srh, 6, srh->me, &pos, LOSE - 1, WIN + 1, true, 0);
 #endif
 
-	return pos;
+	if (bd->arr[pos] == EMPTY)
+		return pos;
+	else
+	{
+		printf("MESSAGE Error\n");
+		for (u16 i = 0; i < 225; i++)
+			if (bd->arr[i] == EMPTY)
+				return i;
+	}
+	return -1;
 }
