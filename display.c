@@ -134,7 +134,7 @@ void print_board(Board* bd)
         printf("(%d, %d) ", bd->mlist[i] % BD_SIDE, bd->mlist[i] / BD_SIDE);
     putchar('\n');
 #endif
-    
+
 #if DISPLAY_CAND
     print_mvlist(pcand(bd));
 #endif

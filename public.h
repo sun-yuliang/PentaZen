@@ -33,7 +33,7 @@ extern "C" {
 #define SEARCH_INFO                 1
 #define MESSAGE_STAT                0
 #define RANDOM_PCT                  0.0
-    
+
 // Search setting.
 #define ITERATIVE_DEEPENING         1
 #define SEARCH_DEPTH_MAX            256

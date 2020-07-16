@@ -22,7 +22,7 @@ extern "C" {
 #define PAT_START       3
 #define AD_START        (3 + PAT_SIZE)
 #define PATTAB_SIZE     (3 + PAT_SIZE + AD_SIZE)
-    
+
 extern u8 Pat5f[IIE5][PATTAB_SIZE];
 extern u8 Pat6f[IIE6][PATTAB_SIZE];
 extern u8 Pat7f[IIE7][PATTAB_SIZE];

@@ -619,7 +619,7 @@ static void generate_pattern_defending(u8* tab, const Rule ru, const u8 len, con
     i8 bd8 = len - 7;
     i8 bd9 = len - 8;
     u8 i, j, ind1 = PAT_START, ind2 = AD_START;
-    
+
     // reset to COL_INVALID
     memset(tab, -1, PATTAB_SIZE);
 
@@ -686,7 +686,7 @@ static void generate_pattern_defending(u8* tab, const Rule ru, const u8 len, con
             if (b4_7[sev[i]].is && !((mask >> i) & PatternList[b4_7[sev[i]].index][3]))
             {
                 for (j = 5; j < PatternList[b4_7[sev[i]].index][4]; j++)
-                { 
+                {
                     tab[ind2++] = PatternList[b4_7[sev[i]].index][j] + i;
                     tab[ind2++] = B4d;
                 }

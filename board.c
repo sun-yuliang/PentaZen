@@ -214,7 +214,7 @@ static void lookup_update(Board* bd, const Pos pos)
     Pos a2 = bd->seg[c - 1][3][pos].end;
     Pos a3 = bd->seg[oc - 1][3][pos].sta;
     Pos a4 = bd->seg[oc - 1][3][pos].end;
-    
+
     pat_reset(ppinc(bd));
     score(bd)[0] = bd->sc[num(bd) - 1][0];
     score(bd)[1] = bd->sc[num(bd) - 1][1];

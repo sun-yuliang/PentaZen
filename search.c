@@ -38,7 +38,7 @@ Score evaluate(const Board* bd)
     ev2 = score(bd)[opp(bd->next) - 1];
     ev3 = bd->sc[num(bd) - 1][bd->next - 1];
     ev4 = bd->sc[num(bd) - 1][opp(bd->next) - 1];
-    
+
     return (ev1 - ev2 + ev3 - ev4) / 2;
 }
 
@@ -65,7 +65,7 @@ static Score alphabeta(Board* bd, Pos* best, const u16 dep, Score alpha, Score b
     bd->node_cnt++;
     if (num(bd) > bd->stone_max)
         bd->stone_max = num(bd);
-    
+
     // Check WLD.
     u8 offset = 0;
     Color wld = check_wld(bd, &offset);
@@ -173,7 +173,7 @@ RECURSE:
             ev = -alphabeta(bd, &tmp, dep_new, -beta, -alpha);
             undo(bd);
         }
-        
+
         if (bd->timeout)
             return alpha;
 
@@ -240,7 +240,7 @@ static Score iterative(Board* bd, Pos* best, u16* dep)
             // if victory move is found
             flag = true;
             if (*dep > VICTORY_REPEAT - 1)
-            {    
+            {
                 for (u16 i = 0; i < VICTORY_REPEAT; i++)
                     if (abs(ev_arr[*dep - 1 - i]) < VAL_VTHRE)
                         flag = false;
@@ -269,7 +269,7 @@ Pos get_best(Board* bd)
     bd->stone_ini = num(bd);
     bd->stone_max = num(bd);
     bd->node_cnt = 0;
-    
+
     // Check if first move.
     if (num(bd) == 0)
     {
@@ -317,7 +317,7 @@ Pos get_best(Board* bd)
     bd->t_end = get_ms();
     print_message(bd, bd->search_dep, bd->stone_max - bd->stone_ini, ev, bd->node_cnt, bd->t_end - bd->t_begin);
 #endif
-    
+
 #if MESSAGE_STAT
     Pos ptmp;
     Score ev0 = VAL_INVALID, ev1 = VAL_INVALID;
@@ -342,7 +342,7 @@ Pos get_best(Board* bd)
     //         break;
     //     }
     // }
-    
+
     // CutThreshold
     // ev0 = cand(bd).list[0].val;  // largest ev in mvlist
     // printf("MESSAGE %d\n", ev0 - ev1);

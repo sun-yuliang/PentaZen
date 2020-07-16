@@ -47,7 +47,7 @@ typedef struct
     u16 num[2];                             // stone number
     Pos board[BD_SIZE];                     // board array
     Pos mlist[BD_SIZE];                     // move array
-    
+
     Pattern pinc;                           // pattern increment
     Segment seg[2][4][BD_SIZE];             // segment array for each color, direction and position
 
