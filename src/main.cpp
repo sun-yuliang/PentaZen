@@ -5,22 +5,13 @@
  *  / /    /  ___/ / / / / /_/ /_/ / /____/  ___/ / / /
  * /_/     \____/_/ /_/ /___/\__,_/______/\____/_/ /_/
  *
- * PentaZen, a Gomoku/Renju playing engine developed by Sun.
+ * PentaZen, a Gomoku/Renju playing engine developed by Sun Yuliang.
  */
 
-#ifndef __PROTOCOL_H__
-#define __PROTOCOL_H__
+#include "protocol.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+int main() {
+    loop();
 
-#include "board.h"
-
-void loop(Board* bd);
-
-#ifdef __cplusplus
+    return 0;
 }
-#endif
-
-#endif

@@ -1,12 +1,7 @@
-# object and exe file
-*.o
 *.exe
-
-# VsCode file
+*.o
+*.out
+*.pyc
 *.vscode
 
-# Editplus file
-*.bak
-
-# test file
-*.out
+pattern_*.h

@@ -2,35 +2,22 @@
 
 PentaZen is a strong gomoku/renju playing engine supporting [Gomocup protocol](http://petr.lastovicka.sweb.cz/protocl2en.htm). The latest release supports some of [Yixin protocol](https://github.com/accreator/Yixin-protocol).
 
-In [Gomocup](https://gomocup.org/) 2019, PentaZen 0.1.0 ranks 19th in freestyle league, 16th in fastgame league, 12th in standard league and 8th in renju league.
+The latest commit in master branch is the source code of PentaZen 0.4.18, the version for Gomocup 2021. The outdated versions can be found in other branches.
 
-In [Gomocup](https://gomocup.org/) 2020, PentaZen 0.3.2 ranks 4th in freestyle and fastgame league, 3rd in standard and renju league.
+PentaZen 0.4.18 is based on pure alpha-beta search framework. Starting from PentaZen 0.5.0, neural networks are involved.
 
-The latest commit in master branch is the source code of PentaZen 0.2.1. The newer versions are much stronger, i.e. almost 100% beats PentaZen 0.2.1.
+## Compiling
 
-## Getting Started
-
-### Prerequisites
-
-You need to download [Piskvork gomoku manager](https://sourceforge.net/projects/piskvork/files/piskvork.zip/download) to run PentaZen engine.
-
-### Compiling
-
-The source codes are compiled using mingw-w64 on Windows 10.
+The source codes can be compiled using mingw-w64 on Windows 10. To compile the main program, you need to generate pattern header files for different rules first by compiling the code in src/pattern folder and running the binary.
 
 ## Running the Engine
 
-In Piskvork, you can choose pbrain-PentaZen.exe as the engine. The detailed instructions can be found in the readme file of Piskvork.
+The engine supports Gomocup protocol and part of Yixin board commands. You can run the engine through command line or by any GUI supporting these protocols.
 
-## Known Defects (0.2.1)
+## Known Defects
 
-* Cannot recognize recursively defined fouls.
-* Occasionally return false victory evaluation.
+* Cannot recognize recursively defined fouls more than 2 ply.
 
 ## Author
 
-* **Sun**
-
-## License
-
-See the license file for details.
+* **Sun Yuliang**
